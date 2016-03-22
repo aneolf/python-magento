@@ -11,7 +11,12 @@
 import os
 from setuptools import setup
 
-execfile(os.path.join('magento', 'version.py'))
+try:
+    execfile(os.path.join('magento', 'version.py'))
+except NameError:
+    with open(os.path.join('magento', 'version.py')) as f:
+        code = compile(f.read(), 'version.py', 'exec')
+        exec(code)
 
 setup(
     name = 'magento',
